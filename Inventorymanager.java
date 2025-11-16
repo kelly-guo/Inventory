@@ -21,7 +21,7 @@ class Inventorymanager {
             System.out.println("This item is already in the system!");
         } else {
             map.put(item.getId(), item);
-            Transaction addition = new Transaction("Add", item.getId(), LocalDate.now());
+            Transaction addition = new Transaction("Add", item.getId(), LocalDate.now(), item);
             history.add(addition);
         }
     }
@@ -30,7 +30,7 @@ class Inventorymanager {
         if (map.containsKey(id)) {
             Item item = map.get(id);
             item.setQty(qty);
-            Transaction update = new Transaction("Update", item.getId(), LocalDate.now());
+            Transaction update = new Transaction("Update", item.getId(), LocalDate.now(), item);
             history.add(update);
         } else {
             System.out.println("This ID is not in the system!");
@@ -71,16 +71,26 @@ class Inventorymanager {
     }
 
     //<10 = low stock
-    public List<Item> getLowStock() {
+    public List<Item> getLowStock(int min) {
         List<Item> lowStock = new ArrayList<>();
         for (Map.Entry<Integer, Item> entry : map.entrySet()) {
             Item item = entry.getValue();
-            if (item.getQuantity() <= 10) {
+            if (item.getQuantity() <= min) {
                 lowStock.add(item);
             }
 
         }
         return lowStock;
+
+    }
+
+    public double getTotalValue() {
+        double total = 0;
+        for (Map.Entry<Integer, Item> entry : map.entrySet()) {
+            Item item = entry.getValue();
+            total += item.getPrice() * item.getQuantity();
+        }
+        return total;
 
     }
 

@@ -7,7 +7,7 @@ class Item {
     private int quantity;
     private String category;
 
-    Item(String name, int id, double price, int quantity, String category) {
+    public Item(String name, int id, double price, int quantity, String category) {
         this.name = name;
         this.id = id;
         this.price = price;
@@ -37,6 +37,10 @@ class Item {
 
     public String getCategory() {
         return category;
+    }
+
+    public double getPrice() {
+        return price;
     }
 
     public void print() {
