@@ -11,6 +11,7 @@ class Order {
         this.total = total;
         this.date = date;
         items = new ArrayList<>();
+
     }
 
     public double getPurchaseTotal() {
@@ -18,7 +19,22 @@ class Order {
         for (OrderItem item : items) {
             double+=item.getCost() * item.getQuantity();
         }
+        this.total = total;
         return total;
+    }
+
+    public Localdate getDate() {
+        return date;
+    }
+
+    public void addItem(Item item, int qty) {
+        OrderItem newItem = new OrderItem(qty, item, item.getPrice());
+        items.add(newItem);
+
+    }
+
+    public String toString() {
+        return "Order ID: " + orderId + " Order total: " + total + " Items: " + 
     }
 
 }

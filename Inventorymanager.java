@@ -26,6 +26,16 @@ class Inventorymanager {
         }
     }
 
+    public void removeItem(int id) {
+        if (map.containsKey(id)) {
+            map.remove(id);
+            Transaction remove = new Transaction("Remove", id, LocalDate.now(), map.get(id));
+        } else {
+            System.out.println("This ID is not in the system!");
+        }
+
+    }
+
     public void updateStock(int qty, int id) {
         if (map.containsKey(id)) {
             Item item = map.get(id);

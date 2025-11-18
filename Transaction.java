@@ -4,7 +4,7 @@ import java.time.LocalDate;
 class Transaction {
 
     private String category; //Add, Remove, Update
-    private int id;
+    private int id; //of item
     private LocalDate time;
     private int qty;
     private Item item;
