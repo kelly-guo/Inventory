@@ -7,8 +7,8 @@ class OrderHistory {
 
     List<Order> orders;
 
-    public OrderHistory(List<Order> orders) {
-        this.orders = orders;
+    public OrderHistory() {
+        orders = new ArrayList<>();
     }
 
     public void addOrder(Order order) {
@@ -26,4 +26,15 @@ class OrderHistory {
         return res;
     }
 
+    public double getTotalSalesFrom(LocalDate t1, LocalDate t2) {
+        double sum = 0;
+        for (int i = 0; i < orders.size(); i++) {
+            LocalDate date = (LocalDate) orders.get(i).getDate();
+            if (date.isAfter(t1) && date.isBefore(t2)) {
+                sum += orders.get(i).getPurchaseTotal();
+            }
+        }
+        return sum;
+
+    }
 }

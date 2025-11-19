@@ -19,4 +19,8 @@ class OrderItem {
         return qty;
     }
 
+    public String getName() {
+        return item.getName();
+    }
+
 }
