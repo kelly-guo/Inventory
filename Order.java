@@ -1,5 +1,5 @@
 
-class Order {
+public class Order {
 
     private int orderId;
     private double total;

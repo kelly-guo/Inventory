@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-class Inventorymanager {
+public class Inventorymanager {
 
     Map<Integer, Item> map; //id, item
     List<Transaction> history;
