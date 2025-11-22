@@ -1,5 +1,6 @@
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Scanner;
 
 class Main {
@@ -13,8 +14,9 @@ class Main {
         System.out.println("Welcome to the Java Inventory Management System!");
         System.out.println("1 - Place an order");
         System.out.println("2 - Alter inventory");
-        System.out.println("3 - View History");
-        System.out.println("4 - Quit program");
+        System.out.println("3 - View history");
+        System.out.println("4 - Search for a product");
+        System.out.println("5 - Quit program");
         int choice = Integer.parseInt(scanner.nextLine().trim());
         if (choice == 1) {
             boolean inOrder = true;
@@ -104,9 +106,27 @@ class Main {
                     int prodQty = Integer.parseInt(scanner.nextLine().trim());
                     manager.updateStock(prodQty, prodId);
 
+                } else if (inventoryChoice == 3) {
+                    System.out.println("Enter in ID: ");
+                    int prodId = Integer.parseInt(scanner.nextLine().trim());
+                    manager.removeItem(prodId);
+
+                } else if (inventoryChoice == 4) {
+                    System.out.println("What should the threshold for low stock be?");
+                    int min = Integer.parseInt(scanner.nextLine().trim());;
+                    List<Item> lowStock = manager.getLowStock(min);
+                    for (Item item : lowStock) {
+                        item.print();
+                    }
+                } else if (inventoryChoice == 5) {
+                    double total = manager.getTotalValue();
+                    System.out.println("All products are worth: " + total);
                 }
             }
 
+        } else if (choice == 3) {
+            System.out.println("1 - View order history");
+            System.out.println("2 - View managing history");
         }
     }
 

@@ -80,7 +80,6 @@ public class Inventorymanager {
         return result;
     }
 
-    //<10 = low stock
     public List<Item> getLowStock(int min) {
         List<Item> lowStock = new ArrayList<>();
         for (Map.Entry<Integer, Item> entry : map.entrySet()) {
