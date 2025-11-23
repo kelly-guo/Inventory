@@ -1,5 +1,6 @@
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -127,6 +128,53 @@ class Main {
         } else if (choice == 3) {
             System.out.println("1 - View order history");
             System.out.println("2 - View managing history");
+            int historyChoice = Integer.parseInt(scanner.nextLine().trim());
+            if (historyChoice == 1) {
+                System.out.println("1 - Get orders from date-date");
+                System.out.println("2 - Get total sales from date-date");
+                int orderChoice = Integer.parseInt(scanner.nextLine().trim());
+                if (orderChoice == 1) {
+                    List<Order> list = new ArrayList<>();
+                    System.out.println("Enter in date 1 (MM/DD/YYYY): ");
+                    String date1 = scanner.nextLine().trim();
+                    String[] date = date1.split("/");
+                    int year1 = Integer.parseInt(date[2]);
+                    int day1 = Integer.parseInt(date[1]);
+                    int month1 = Integer.parseInt(date[0]);
+                    LocalDate start = LocalDate.of(year1, month1, day1);
+                    System.out.println("Enter in date 2 (MM/DD/YYYY): ");
+                    String date2 = scanner.nextLine().trim();
+                    String[] date2s = date2.split("/");
+                    int year2 = Integer.parseInt(date2s[2]);
+                    int day2 = Integer.parseInt(date2s[1]);
+                    int month2 = Integer.parseInt(date2s[0]);
+                    LocalDate end = LocalDate.of(year1, month1, day1);
+
+                    list = history.getOrdersFrom(start, end);
+                    for (Order o : list) {
+                        System.out.println(o.toString());
+                    }
+                } else if (orderChoice == 2) {
+                    System.out.println("Enter in date 1 (MM/DD/YYYY): ");
+                    String date1 = scanner.nextLine().trim();
+                    String[] date = date1.split("/");
+                    int year1 = Integer.parseInt(date[2]);
+                    int day1 = Integer.parseInt(date[1]);
+                    int month1 = Integer.parseInt(date[0]);
+                    LocalDate start = LocalDate.of(year1, month1, day1);
+                    System.out.println("Enter in date 2 (MM/DD/YYYY): ");
+                    String date2 = scanner.nextLine().trim();
+                    String[] date2s = date2.split("/");
+                    int year2 = Integer.parseInt(date2s[2]);
+                    int day2 = Integer.parseInt(date2s[1]);
+                    int month2 = Integer.parseInt(date2s[0]);
+                    LocalDate end = LocalDate.of(year1, month1, day1);
+                    double total = history.getTotalSalesFrom(start, end);
+                    System.out.println("The total for all sales from " + start + " to " + end + " was " + total);
+
+                }
+
+            }
         }
     }
 
