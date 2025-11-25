@@ -23,4 +23,8 @@ class OrderItem {
         return item.getName();
     }
 
+    public Item getItem() {
+        return item;
+    }
+
 }

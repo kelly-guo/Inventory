@@ -85,6 +85,7 @@ class Main {
                 System.out.println("3 - Remove a product");
                 System.out.println("4 - Get low stock");
                 System.out.println("5 - Get total value of inventory");
+                System.out.println("6 - Go Back");
                 int inventoryChoice = Integer.parseInt(scanner.nextLine().trim());
                 if (inventoryChoice == 1) {
                     System.out.println("Enter in product name: ");
@@ -122,6 +123,8 @@ class Main {
                 } else if (inventoryChoice == 5) {
                     double total = manager.getTotalValue();
                     System.out.println("All products are worth: " + total);
+                } else if (inventoryChoice == 6) {
+                    break;
                 }
             }
 
@@ -132,6 +135,7 @@ class Main {
             if (historyChoice == 1) {
                 System.out.println("1 - Get orders from date-date");
                 System.out.println("2 - Get total sales from date-date");
+                System.out.println("3 - Get top categories");
                 int orderChoice = Integer.parseInt(scanner.nextLine().trim());
                 if (orderChoice == 1) {
                     List<Order> list = new ArrayList<>();
@@ -171,6 +175,19 @@ class Main {
                     LocalDate end = LocalDate.of(year1, month1, day1);
                     double total = history.getTotalSalesFrom(start, end);
                     System.out.println("The total for all sales from " + start + " to " + end + " was " + total);
+
+                } else if (orderChoice == 3) {
+                    List<String> res = history.getTopCategory();
+                    if (res.size() > 1) {
+                        System.out.println("The top categories are: ");
+                        for (String cat : res) {
+                            System.out.println(cat);
+                            System.out.println(" ");
+                        }
+                    } else {
+                        System.out.println("The top category is: " + res.get(0));
+
+                    }
 
                 }
 

@@ -33,6 +33,10 @@ public class Order {
 
     }
 
+    public List<OrderItem> getOrderItems() {
+        return items;
+    }
+
     public String toString() {
         String result = "Order ID: " + orderId + " Order Total: " + total + " Items: ";
         for (int i = 0; i < items.size(); i++) {
