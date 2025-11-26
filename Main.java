@@ -189,6 +189,31 @@ class Main {
 
                     }
 
+                } else if (orderChoice == 4) {
+                    System.out.println("Would you like to search by name or ID?");
+                    System.out.println("1 - Name");
+                    System.out.println("2 - ID");
+                    System.out.println("3 - Category");
+                    int searchSystem = Integer.parseInt(scanner.nextLine().trim());
+                    if (searchSystem == 1) {
+                        System.out.println("Enter name: ");
+                        String prodName = scanner.nextLine().trim();
+                        manager.searchByName(prodName);
+                    } else if (searchSystem == 2) {
+                        System.out.println("Enter ID: ");
+                        int prodId = Integer.parseInt(scanner.nextLine().trim());
+                        manager.getItem(id);
+                    } else if (searchSystem == 3) {
+                        System.out.println("Enter category: ");
+                        String prodCat = scanner.nextLine().trim();
+                        List<Item> list = new ArrayList<>();
+                        list = manager.searchByCategory(prodCat);
+                        for (Item item : list) {
+                            item.print();
+                        }
+
+                    }
+
                 }
 
             }
