@@ -189,8 +189,8 @@ class Main {
 
                     }
 
-                } else if (orderChoice == 4) {
-                    System.out.println("Would you like to search by name or ID?");
+                } else if (orderChoice == 4) { //add searching for orders with product
+                    System.out.println("Would you like to search by?");
                     System.out.println("1 - Name");
                     System.out.println("2 - ID");
                     System.out.println("3 - Category");
@@ -198,11 +198,49 @@ class Main {
                     if (searchSystem == 1) {
                         System.out.println("Enter name: ");
                         String prodName = scanner.nextLine().trim();
-                        manager.searchByName(prodName);
+                        Item item = manager.searchByName(prodName);
+                        item.print();
+                        System.out.println("Would you like to see orders including this item?");
+                        System.out.println("1 - Yes");
+                        System.out.println("2 - No");
+                        int searchOrder = Integer.parseInt(scanner.nextLine().trim());
+                        if (searchOrder == 1) {
+                            List<Order> list = history.getOrderList();
+                            for (Order order : list) {
+                                List<Item> items = (List<Item>) order.getOrderItems();
+                                for (Item i : items) {
+                                    if (i.getName().equals(prodName)) {
+                                        System.out.println(order.toString());
+                                    }
+
+                                }
+
+                            }
+
+                        }
                     } else if (searchSystem == 2) {
                         System.out.println("Enter ID: ");
                         int prodId = Integer.parseInt(scanner.nextLine().trim());
-                        manager.getItem(id);
+                        Item item = manager.getItem(id);
+                        item.print();
+                        System.out.println("Would you like to see orders including this item?");
+                        System.out.println("1 - Yes");
+                        System.out.println("2 - No");
+                        int searchOrder = Integer.parseInt(scanner.nextLine().trim());
+                        if (searchOrder == 1) {
+                            List<Order> list = history.getOrderList();
+                            for (Order order : list) {
+                                List<Item> items = (List<Item>) order.getOrderItems();
+                                for (Item i : items) {
+                                    if (i.getId() == (prodId)) {
+                                        System.out.println(order.toString());
+                                    }
+
+                                }
+
+                            }
+
+                        }
                     } else if (searchSystem == 3) {
                         System.out.println("Enter category: ");
                         String prodCat = scanner.nextLine().trim();

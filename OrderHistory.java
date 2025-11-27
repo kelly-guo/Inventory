@@ -17,6 +17,10 @@ public class OrderHistory {
         orders.add(order);
     }
 
+    public List<Order> getOrderList() {
+        return orders;
+    }
+
     public List<Order> getOrdersFrom(LocalDate t1, LocalDate t2) {
         List<Order> res = new ArrayList<>();
         for (int i = 0; i < orders.size(); i++) {
