@@ -40,7 +40,7 @@ public class Inventorymanager {
         if (map.containsKey(id)) {
             Item item = map.get(id);
             item.setQty(qty);
-            Transaction update = new Transaction("Update", item.getId(), LocalDate.now(), item);
+            Transaction update = new Transaction("Update", item.getId(), LocalDate.now(), qty, item);
             history.add(update);
         } else {
             System.out.println("This ID is not in the system!");
@@ -101,6 +101,10 @@ public class Inventorymanager {
         }
         return total;
 
+    }
+
+    public List<Transaction> getHistory() {
+        return history;
     }
 
 }

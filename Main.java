@@ -17,11 +17,12 @@ class Main {
         System.out.println("2 - Alter inventory");
         System.out.println("3 - View history");
         System.out.println("4 - Search for a product");
+        System.out.println("5 - View order status");
         System.out.println("5 - Quit program");
         int choice = Integer.parseInt(scanner.nextLine().trim());
         if (choice == 1) {
             boolean inOrder = true;
-            Order order = new Order(id++, 0, LocalDate.now());
+            Order order = new Order(id++, 0, LocalDate.now(), "Pending");
             while (inOrder) {
                 System.out.println("1 - Add products to order");
                 System.out.println("2 - See your purchase total");
@@ -188,66 +189,85 @@ class Main {
                         System.out.println("The top category is: " + res.get(0));
 
                     }
+                }
+            } else if (historyChoice == 2) {
+                List<Transaction> list = manager.getHistory();
+                for (Transaction t : list) {
+                    t.printTransaction();
+                }
 
-                } else if (orderChoice == 4) { //add searching for orders with product
-                    System.out.println("Would you like to search by?");
-                    System.out.println("1 - Name");
-                    System.out.println("2 - ID");
-                    System.out.println("3 - Category");
-                    int searchSystem = Integer.parseInt(scanner.nextLine().trim());
-                    if (searchSystem == 1) {
-                        System.out.println("Enter name: ");
-                        String prodName = scanner.nextLine().trim();
-                        Item item = manager.searchByName(prodName);
-                        item.print();
-                        System.out.println("Would you like to see orders including this item?");
-                        System.out.println("1 - Yes");
-                        System.out.println("2 - No");
-                        int searchOrder = Integer.parseInt(scanner.nextLine().trim());
-                        if (searchOrder == 1) {
-                            List<Order> list = history.getOrderList();
-                            for (Order order : list) {
-                                List<Item> items = (List<Item>) order.getOrderItems();
-                                for (Item i : items) {
-                                    if (i.getName().equals(prodName)) {
-                                        System.out.println(order.toString());
-                                    }
-
-                                }
-
+            }
+        } else if (choice == 4) { //add searching for orders with product
+            System.out.println("Would you like to search by?");
+            System.out.println("1 - Name");
+            System.out.println("2 - ID");
+            System.out.println("3 - Category");
+            System.out.println("4 - Product (Finding orders)");
+            int searchSystem = Integer.parseInt(scanner.nextLine().trim());
+            if (searchSystem == 1) {
+                System.out.println("Enter name: ");
+                String prodName = scanner.nextLine().trim();
+                Item item = manager.searchByName(prodName);
+                item.print();
+                System.out.println("Would you like to see orders including this item?");
+                System.out.println("1 - Yes");
+                System.out.println("2 - No");
+                int searchOrder = Integer.parseInt(scanner.nextLine().trim());
+                if (searchOrder == 1) {
+                    List<Order> list = history.getOrderList();
+                    for (Order order : list) {
+                        List<Item> items = (List<Item>) order.getOrderItems();
+                        for (Item i : items) {
+                            if (i.getName().equals(prodName)) {
+                                System.out.println(order.toString());
                             }
 
                         }
-                    } else if (searchSystem == 2) {
-                        System.out.println("Enter ID: ");
-                        int prodId = Integer.parseInt(scanner.nextLine().trim());
-                        Item item = manager.getItem(id);
-                        item.print();
-                        System.out.println("Would you like to see orders including this item?");
-                        System.out.println("1 - Yes");
-                        System.out.println("2 - No");
-                        int searchOrder = Integer.parseInt(scanner.nextLine().trim());
-                        if (searchOrder == 1) {
-                            List<Order> list = history.getOrderList();
-                            for (Order order : list) {
-                                List<Item> items = (List<Item>) order.getOrderItems();
-                                for (Item i : items) {
-                                    if (i.getId() == (prodId)) {
-                                        System.out.println(order.toString());
-                                    }
 
-                                }
+                    }
 
+                }
+            } else if (searchSystem == 2) {
+                System.out.println("Enter ID: ");
+                int prodId = Integer.parseInt(scanner.nextLine().trim());
+                Item item = manager.getItem(id);
+                item.print();
+                System.out.println("Would you like to see orders including this item?");
+                System.out.println("1 - Yes");
+                System.out.println("2 - No");
+                int searchOrder = Integer.parseInt(scanner.nextLine().trim());
+                if (searchOrder == 1) {
+                    List<Order> list = history.getOrderList();
+                    for (Order order : list) {
+                        List<Item> items = (List<Item>) order.getOrderItems();
+                        for (Item i : items) {
+                            if (i.getId() == (prodId)) {
+                                System.out.println(order.toString());
                             }
 
                         }
-                    } else if (searchSystem == 3) {
-                        System.out.println("Enter category: ");
-                        String prodCat = scanner.nextLine().trim();
-                        List<Item> list = new ArrayList<>();
-                        list = manager.searchByCategory(prodCat);
-                        for (Item item : list) {
-                            item.print();
+
+                    }
+
+                }
+            } else if (searchSystem == 3) {
+                System.out.println("Enter category: ");
+                String prodCat = scanner.nextLine().trim();
+                List<Item> list = new ArrayList<>();
+                list = manager.searchByCategory(prodCat);
+                for (Item item : list) {
+                    item.print();
+                }
+
+            } else if (searchSystem == 4) {
+                System.out.println("Name of product: ");
+                String prodName = scanner.nextLine().trim();
+                List<Order> list = history.getOrderList();
+                for (Order order : list) {
+                    List<Item> items = (List<Item>) order.getOrderItems();
+                    for (Item i : items) {
+                        if (i.getName().equals((prodName))) {
+                            System.out.println(order.toString());
                         }
 
                     }
@@ -255,7 +275,10 @@ class Main {
                 }
 
             }
-        }
-    }
 
+        } else if (choice == 5) {
+
+        }
+
+    }
 }

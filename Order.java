@@ -5,12 +5,25 @@ public class Order {
     private double total;
     private LocalDate date;
     private List<OrderItem> items;
+    private String status //pending, delivered, shipped
+    private LocalDate expectedArrival; //five days after placing
 
     public Order(int orderId, double total, LocalDate date) {
         this.orderId = orderId;
         this.total = total;
         this.date = date;
         items = new ArrayList<>();
+        this.expectedArrival = date.plusDays(5);
+
+    }
+
+    public Order(int orderId, double total, LocalDate date, String status) {
+        this.orderId = orderId;
+        this.total = total;
+        this.date = date;
+        items = new ArrayList<>();
+        this.status = status;
+        this.expectedArrival = date.plusDays(5);
 
     }
 
@@ -35,6 +48,10 @@ public class Order {
 
     public List<OrderItem> getOrderItems() {
         return items;
+    }
+
+    public String getStatus() {
+        return status;
     }
 
     public String toString() {

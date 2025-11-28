@@ -26,9 +26,11 @@ class Transaction {
         if (category.equals("Add")) {
             System.out.println("You added " + item.getName() + " to the system on " + time);
         } else if (category.equals("Remove")) {
+            System.out.println("You removed " + item.getName() + " from the system on " + time);
 
+        } else if (category.equals("Update")) {
+            System.out.println("You updated " + item.getName() + " with " + qty + " more stock on " + time);
         }
-        System.out.println("");
     }
 
 }
