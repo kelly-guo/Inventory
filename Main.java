@@ -18,7 +18,7 @@ class Main {
         System.out.println("3 - View history");
         System.out.println("4 - Search for a product");
         System.out.println("5 - View order status");
-        System.out.println("5 - Quit program");
+        System.out.println("6 - Quit program");
         int choice = Integer.parseInt(scanner.nextLine().trim());
         if (choice == 1) {
             boolean inOrder = true;
@@ -138,6 +138,8 @@ class Main {
                 System.out.println("1 - Get orders from date-date");
                 System.out.println("2 - Get total sales from date-date");
                 System.out.println("3 - Get top categories");
+                System.out.println("4 - Get average order value from date-date");
+                System.out.println("5 - Get total amount of orders fom date-date");
                 int orderChoice = Integer.parseInt(scanner.nextLine().trim());
                 if (orderChoice == 1) {
                     List<Order> list = new ArrayList<>();

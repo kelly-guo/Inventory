@@ -71,4 +71,33 @@ public class OrderHistory {
         }
         return res;
     }
+
+    public int getTotalOrdersFrom(LocalDate t1, LocalDate t2) {
+        int count = 0;
+        for (int i = 0; i < orders.size(); i++) {
+            LocalDate curr = (LocalDate) orders.get(i).getDate();
+            if (curr.isAfter(t1) && curr.isBefore(t2)) {
+                count++;
+            }
+
+        }
+        return count;
+    }
+
+    public double averageOrderValueFrom(LocalDate t1, LocalDate t2) {
+        int numOrders = 0;
+        double totalPrice = 0;
+        for (int i = 0; i < orders.size(); i++) {
+            LocalDate curr = (LocalDate) orders.get(i).getDate();
+            if (curr.isAfter(t1) && curr.isBefore(t2)) {
+                numOrders++;
+                totalPrice += orders.get(i).getPurchaseTotal();
+            }
+
+        }
+        if (numOrders == 0) {
+            return 0;
+        }
+        return totalPrice / numOrders;
+    }
 }
