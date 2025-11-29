@@ -40,6 +40,10 @@ public class Order {
         return date;
     }
 
+    public int getId() {
+        return orderId;
+    }
+
     public void addItem(Item item, int qty) {
         OrderItem newItem = new OrderItem(qty, item, item.getPrice());
         items.add(newItem);
@@ -52,6 +56,17 @@ public class Order {
 
     public String getStatus() {
         return status;
+    }
+
+    public void updateStatus() {
+        LocalDate targetDate = date.plusDays(1);
+        if (LocalDate.now().isAfter(targetDate)) {
+            this.status = "Shipped";
+        } else if (LocalDate.now().isAfter(expectedArrival)) {
+            this.status = "Delivered";
+        } else {
+            this.status = "Pending";
+        }
     }
 
     public String toString() {

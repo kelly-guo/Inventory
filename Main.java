@@ -74,6 +74,7 @@ class Main {
                     System.out.println(order.toString());
                 } else if (orderOption == 4) {
                     history.addOrder(order);
+                    System.out.println("You placed your order. ID: " + order.getId());
                     break;
                 }
             }
@@ -277,6 +278,32 @@ class Main {
             }
 
         } else if (choice == 5) {
+            System.out.println("Enter in your order ID: ");
+            int orderId = Integer.parseInt(scanner.nextLine().trim());
+            List<Order> list = history.getOrderList();
+            Order order = null;
+            for (Order o : list) {
+                if (o.getId() == orderId) {
+                    order = o;
+
+                }
+            }
+            if (order == null) {
+                System.out.println("This ID is not in the system!");
+            } else {
+                System.out.println(order.toString());
+                System.out.println("Your order is: ");
+                order.updateStatus();
+                String status = order.getStatus();
+                if (status.equals("Pending")) {
+                    System.out.println("Your order is pending");
+                } else if (status.equals("Shipped")) {
+                    System.out.println("Your order is on the way");
+                } else {
+                    System.out.println("Your order has arrived!");
+                }
+
+            }
 
         }
 
