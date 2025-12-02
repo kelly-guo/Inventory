@@ -18,7 +18,8 @@ class Main {
         System.out.println("3 - View history");
         System.out.println("4 - Search for a product");
         System.out.println("5 - View order status");
-        System.out.println("6 - Quit program");
+        System.out.println("6 - Manage Shippers");
+        System.out.println("7 - Quit program");
         int choice = Integer.parseInt(scanner.nextLine().trim());
         if (choice == 1) {
             boolean inOrder = true;
@@ -192,6 +193,42 @@ class Main {
                         System.out.println("The top category is: " + res.get(0));
 
                     }
+                } else if (orderChoice == 4) {
+                    System.out.println("Enter in date 1 (MM/DD/YYYY): ");
+                    String date1 = scanner.nextLine().trim();
+                    String[] date = date1.split("/");
+                    int year1 = Integer.parseInt(date[2]);
+                    int day1 = Integer.parseInt(date[1]);
+                    int month1 = Integer.parseInt(date[0]);
+                    LocalDate start = LocalDate.of(year1, month1, day1);
+                    System.out.println("Enter in date 2 (MM/DD/YYYY): ");
+                    String date2 = scanner.nextLine().trim();
+                    String[] date2s = date2.split("/");
+                    int year2 = Integer.parseInt(date2s[2]);
+                    int day2 = Integer.parseInt(date2s[1]);
+                    int month2 = Integer.parseInt(date2s[0]);
+                    LocalDate end = LocalDate.of(year1, month1, day1);
+                    double value = history.averageOrderValueFrom(start, end);
+                    System.out.println("The average order value from " + start + " to " + end + " is " + value);
+
+                } else if (orderChoice == 5) {
+                    System.out.println("Enter in date 1 (MM/DD/YYYY): ");
+                    String date1 = scanner.nextLine().trim();
+                    String[] date = date1.split("/");
+                    int year1 = Integer.parseInt(date[2]);
+                    int day1 = Integer.parseInt(date[1]);
+                    int month1 = Integer.parseInt(date[0]);
+                    LocalDate start = LocalDate.of(year1, month1, day1);
+                    System.out.println("Enter in date 2 (MM/DD/YYYY): ");
+                    String date2 = scanner.nextLine().trim();
+                    String[] date2s = date2.split("/");
+                    int year2 = Integer.parseInt(date2s[2]);
+                    int day2 = Integer.parseInt(date2s[1]);
+                    int month2 = Integer.parseInt(date2s[0]);
+                    LocalDate end = LocalDate.of(year1, month1, day1);
+                    int total = history.getTotalOrdersFrom(start, end);
+                    System.out.println("The total amount of orders from " + start + " to " + end + " is " + total);
+
                 }
             } else if (historyChoice == 2) {
                 List<Transaction> list = manager.getHistory();
@@ -219,8 +256,8 @@ class Main {
                 if (searchOrder == 1) {
                     List<Order> list = history.getOrderList();
                     for (Order order : list) {
-                        List<Item> items = (List<Item>) order.getOrderItems();
-                        for (Item i : items) {
+                        List<OrderItem> items = order.getOrderItems();
+                        for (OrderItem i : items) {
                             if (i.getName().equals(prodName)) {
                                 System.out.println(order.toString());
                             }
@@ -242,9 +279,9 @@ class Main {
                 if (searchOrder == 1) {
                     List<Order> list = history.getOrderList();
                     for (Order order : list) {
-                        List<Item> items = (List<Item>) order.getOrderItems();
-                        for (Item i : items) {
-                            if (i.getId() == (prodId)) {
+                        List<OrderItem> items = order.getOrderItems();
+                        for (OrderItem i : items) {
+                            if (i.getItem().getId() == (prodId)) {
                                 System.out.println(order.toString());
                             }
 
@@ -262,13 +299,13 @@ class Main {
                     item.print();
                 }
 
-            } else if (searchSystem == 4) {
+            } else if (searchSystem == 4) { //maybe redundant
                 System.out.println("Name of product: ");
                 String prodName = scanner.nextLine().trim();
                 List<Order> list = history.getOrderList();
                 for (Order order : list) {
-                    List<Item> items = (List<Item>) order.getOrderItems();
-                    for (Item i : items) {
+                    List<OrderItem> items = order.getOrderItems();
+                    for (OrderItem i : items) {
                         if (i.getName().equals((prodName))) {
                             System.out.println(order.toString());
                         }
@@ -307,6 +344,10 @@ class Main {
 
             }
 
+        } else if (choice == 6) {
+            System.out.println("1 - Add a new shipper");
+            System.out.println("2 - Search for a shipper");
+            int shipChoice = Integer.parseInt(scanner.nextLine().trim());
         }
 
     }

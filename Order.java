@@ -1,11 +1,15 @@
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
 public class Order {
 
     private int orderId;
     private double total;
     private LocalDate date;
     private List<OrderItem> items;
-    private String status //pending, delivered, shipped
+    private String status; //pending, delivered, shipped
     private LocalDate expectedArrival; //five days after placing
 
     public Order(int orderId, double total, LocalDate date) {
@@ -30,13 +34,13 @@ public class Order {
     public double getPurchaseTotal() {
         double total = 0;
         for (OrderItem item : items) {
-            double+=item.getCost() * item.getQuantity();
+            total += item.getCost() * item.getQuantity();
         }
         this.total = total;
         return total;
     }
 
-    public Localdate getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
