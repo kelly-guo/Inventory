@@ -15,6 +15,13 @@ public class Supplier {
 
     }
 
+    public Supplier(String name, List<Item> products, String contact) {
+        this.name = name;
+        this.products = products;
+        this.contactInfo = contact;
+
+    }
+
     public void addSupplierProduct(Item product) {
         products.add(product);
     }

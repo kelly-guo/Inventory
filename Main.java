@@ -18,7 +18,7 @@ class Main {
         System.out.println("3 - View history");
         System.out.println("4 - Search for a product");
         System.out.println("5 - View order status");
-        System.out.println("6 - Manage Shippers");
+        System.out.println("6 - Manage Suppliers");
         System.out.println("7 - Quit program");
         int choice = Integer.parseInt(scanner.nextLine().trim());
         if (choice == 1) {
@@ -345,9 +345,60 @@ class Main {
             }
 
         } else if (choice == 6) {
-            System.out.println("1 - Add a new shipper");
-            System.out.println("2 - Search for a shipper");
+            System.out.println("1 - Add a new supplier");
+            System.out.println("2 - Search for a supplier");
             int shipChoice = Integer.parseInt(scanner.nextLine().trim());
+            if (shipChoice == 1) {
+                System.out.println("Name of supplier:");
+                String shipName = scanner.nextLine().trim();
+                boolean selectingItems = true;
+                List<Item> items = new ArrayList<>();
+                while (selectingItems) {
+                    System.out.println("Name of product supplied: ");
+                    String prodName = scanner.nextLine().trim();
+                    Item item = manager.searchByName(prodName);
+                    items.add(item);
+                    System.out.println("Would you like to add another item?");
+                    System.out.println("1 - Yes");
+                    System.out.println("2 - No");
+                    int itemChoice = Integer.parseInt(scanner.nextLine().trim());
+                    if (itemChoice == 2) {
+                        selectingItems = false;
+                    }
+                }
+                System.out.println("Contact info: ");
+                String contact = scanner.nextLine().trim();
+                Supplier sup = new Supplier(shipName, items, contact);
+                manager.getSuppliers().add(sup);
+
+            } else if (shipChoice == 2) {
+                System.out.println("Enter supplier name: ");
+                String shipName = scanner.nextLine().trim();
+                List<Supplier> suppliers = manager.getSuppliers();
+                Supplier sup = null;
+                for (Supplier s : suppliers) {
+                    if (s.getName().equals(shipName)) {
+                        sup = s;
+                        break;
+                    }
+                }
+                if (sup == null) {
+                    System.out.println("This name could not be found!");
+                } else {
+                    System.out.println("1 - Add product");
+                    System.out.println("2 - Change contact");
+                    System.out.println("3 - Change name");
+                    int suppChoice = Integer.parseInt(scanner.nextLine().trim());
+                    if (suppChoice == 1) {
+                        System.out.println("Name of product: ");
+                        String prodName = scanner.nextLine().trim();
+                        Item item = manager.searchByName(prodName);
+                        sup.addSupplierProduct(item);
+                    }
+                }
+
+            }
+
         }
 
     }

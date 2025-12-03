@@ -9,6 +9,7 @@ public class Inventorymanager {
 
     Map<Integer, Item> map; //id, item
     List<Transaction> history;
+    List<Supplier> suppliers;
 
     public Inventorymanager() {
         map = new HashMap<>();
@@ -101,6 +102,10 @@ public class Inventorymanager {
         }
         return total;
 
+    }
+
+    public List<Supplier> getSuppliers() {
+        return suppliers;
     }
 
     public List<Transaction> getHistory() {
